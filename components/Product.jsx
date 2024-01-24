@@ -12,21 +12,19 @@ const Product = ({ product }) => {
         ) : null}
 
         <div className="px-1 pt-2">
-          <div className="font-semibold text-[15px] hover:underline cursor-pointer">
+          <span className="font-semibold text-[15px] hover:underline cursor-pointer">
             {product?.title}
-          </div>
+          </span>
 
-          <div className="font-extrabold">
-            £{(product?.price / 100).toFixed(2)}
-          </div>
+          <p className="font-extrabold">£{(product?.price / 100).toFixed(2)}</p>
 
           <div className="relative items-center flex text-[12px] text-gray-500">
-            <div className="line-through">
+            <span className="line-through">
               £{((product?.price * 1.2) / 100).toFixed(2)}
-            </div>
+            </span>
 
-            <div className="px-2">-</div>
-            <div className="line-through">20%</div>
+            <span className="px-2">-</span>
+            <span className="line-through">20%</span>
           </div>
         </div>
       </Link>
