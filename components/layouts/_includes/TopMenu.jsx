@@ -33,6 +33,7 @@ export default function TopMenu() {
                     width={50}
                     height={50}
                     src={"https://picsum.photos/200"}
+                    alt="profile"
                   />
                   <div className="font-bold text-[13px]">Op Pautu</div>
                 </div>
