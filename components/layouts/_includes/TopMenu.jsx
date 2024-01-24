@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { BsChevronDown } from "react-icons/bs";
 import { AiOutlineShoppingCart } from "react-icons/ai";

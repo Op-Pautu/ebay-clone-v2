@@ -1,5 +1,3 @@
-"use client";
-
 export default function SubMenu() {
   const menuItems = [
     { id: 1, name: "Home" },
