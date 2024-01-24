@@ -1,8 +1,6 @@
-"use client";
-
-import React from "react";
 import TopMenu from "./_includes/TopMenu";
 import MainHeader from "./_includes/MainHeader";
+import SubMenu from "./_includes/SubMenu";
 
 const MainLayout = ({ children }) => {
   return (
@@ -11,6 +9,7 @@ const MainLayout = ({ children }) => {
         <div>
           <TopMenu />
           <MainHeader />
+          <SubMenu />
         </div>
       </div>
     </>
