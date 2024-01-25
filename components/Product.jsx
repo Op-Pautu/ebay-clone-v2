@@ -8,7 +8,11 @@ const Product = ({ product }) => {
         className="max-w-[200px] p-1.5 border border-gray-50 hover:border-gray-200 hover:shadow-xl bg-gray-100 rounded mx-auto"
       >
         {product?.url ? (
-          <img src={product.url + "/190"} className="rounded cursor-pointer" />
+          <img
+            src={product.url + "/190"}
+            className="rounded cursor-pointer"
+            alt="image"
+          />
         ) : null}
 
         <div className="px-1 pt-2">

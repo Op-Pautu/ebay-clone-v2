@@ -1,5 +1,3 @@
-"use client";
-
 import SimilarProducts from "@/components/SimilarProducts";
 import MainLayout from "@/components/layouts/MainLayout";
 
@@ -55,10 +53,9 @@ export default function ProductPage({ params }) {
                   <button className="text-white py-2 px-20 rounded-full cursor-pointer bg-[#3498C9]">
                     Add To Cart
                   </button>
-
-                  <div className="py-1 border-b" />
                 </div>
               </div>
+              <div className="py-1 border-b" />
 
               <div className="pt-3">
                 <h4 className="pb-1 font-semibold">Description:</h4>
