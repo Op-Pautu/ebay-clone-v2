@@ -15,7 +15,7 @@ export default function Cart() {
 
   return (
     <MainLayout>
-      <div className="max-w-[1200px] mx-auto mb-8 min-h-[300px]">
+      <section className="max-w-[1200px] mx-auto mb-8 min-h-[300px]">
         <h2 className="my-4 text-2xl font-bold">Shopping Cart</h2>
 
         <div className="relative flex items-baseline justify-between gap-2">
@@ -33,12 +33,12 @@ export default function Cart() {
               </button>
 
               <div className="flex items-center justify-between mt-4 mb-1 text-sm">
-                <p>Items (3)</p>
-                <p>£12.99</p>
+                <span>Items (3)</span>
+                <span>£12.99</span>
               </div>
               <div className="flex items-center justify-between mb-4 text-sm">
-                <p>Shipping:</p>
-                <p>Free</p>
+                <span>Shipping:</span>
+                <span>Free</span>
               </div>
 
               <div className="border-b border-gray-300" />
@@ -50,7 +50,7 @@ export default function Cart() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
       <SimilarProducts />
     </MainLayout>
   );
