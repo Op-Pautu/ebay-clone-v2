@@ -5,7 +5,7 @@ import Link from "next/link";
 import React from "react";
 
 export default function AuthPage() {
-  //   const supabase = createClientComponentClient();
+  const supabase = createClientComponentClient();
   return (
     <>
       <div id="AuthPage" className="w-full min-h-screen bg-white">
@@ -20,13 +20,13 @@ export default function AuthPage() {
         </div>
 
         <div className="max-w-[400px] mx-auto px-2">
-          {/* <Auth
+          <Auth
             onlyThirdPartyProviders
             providers={["google"]}
             redirectTo={`${window.location.origin}/auth/callback`}
             supabaseClient={supabase}
             appearance={{ theme: ThemeSupa }}
-          /> */}
+          />
         </div>
       </div>
     </>
