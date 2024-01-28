@@ -1,8 +1,65 @@
+"use client";
+
 import TextInput from "@/components/TextInput";
 import MainLayout from "@/components/layouts/MainLayout";
-import React from "react";
+import { useUser } from "@/context/user";
+import useIsLoading from "@/hooks/useIsLoading";
+import useUserAddress from "@/hooks/useUserAddress";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
 
 export default function Address() {
+  const router = useRouter();
+  const { user } = useUser();
+
+  const [addressId, setAddressId] = useState(null);
+  const [name, setName] = useState("");
+  const [address, setAddress] = useState("");
+  const [zipcode, setZipcode] = useState("");
+  const [city, setCity] = useState("");
+  const [country, setCountry] = useState("");
+  const [isUpdatingAddress, setIsUpdatingAddress] = useState(false);
+  const [error, setError] = useState({});
+
+  const showError = (type) => {
+    if (Object.entries(error).length > 0 && error?.type === type) {
+      return error.message;
+    }
+
+    return "";
+  };
+
+  const getAddress = async () => {
+    if (user?.id == null || user?.id == undefined) {
+      useIsLoading(false);
+      return;
+    }
+
+    const response = await useUserAddress();
+
+    if (response) {
+      setTheCurrentAddress(response);
+      useIsLoading(false);
+      return;
+    }
+
+    useIsLoading(false);
+  };
+
+  useEffect(() => {
+    useIsLoading(true);
+    getAddress();
+  }, [user]);
+
+  const setTheCurrentAddress = (result) => {
+    setAddressId(result.id);
+    setName(result.name);
+    setAddress(result.address);
+    setZipcode(result.zipcode);
+    setCity(result.city);
+    setCountry(result.country);
+  };
+
   return (
     <MainLayout>
       <section id="AddressPage" className="mt-4 max-w-[600px] mx-auto px-2">
