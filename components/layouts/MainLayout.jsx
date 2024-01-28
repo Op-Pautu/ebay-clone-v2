@@ -1,3 +1,5 @@
+"use client";
+
 import TopMenu from "./_includes/TopMenu";
 import MainHeader from "./_includes/MainHeader";
 import SubMenu from "./_includes/SubMenu";

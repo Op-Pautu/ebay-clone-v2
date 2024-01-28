@@ -1,5 +1,6 @@
 "use client";
 
+import ClientOnly from "@/components/ClientOnly";
 import TextInput from "@/components/TextInput";
 import MainLayout from "@/components/layouts/MainLayout";
 import { useUser } from "@/context/user";
@@ -8,6 +9,7 @@ import useIsLoading from "@/hooks/useIsLoading";
 import useUserAddress from "@/hooks/useUserAddress";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { AiOutlineLoading3Quarters } from "react-icons/ai";
 import { toast } from "react-toastify";
 
 export default function Address() {
@@ -124,17 +126,81 @@ export default function Address() {
         <div className="p-3 mx-auto bg-white rounded-lg">
           <h2 className="mb-2 text-xl text-bold">Address Details</h2>
 
-          <form>
+          <form onSubmit={submit}>
             <div className="mb-4">
-              <TextInput
-                className="w-full"
-                string={"TEST"}
-                placeholder={"Name"}
-              />
+              <ClientOnly>
+                <TextInput
+                  className="w-full"
+                  string={name}
+                  placeholder="Name"
+                  onUpdate={setName}
+                  error={showError("name")}
+                />
+              </ClientOnly>
+            </div>
+            <div className="mb-4">
+              <ClientOnly>
+                <TextInput
+                  className="w-full"
+                  string={address}
+                  placeholder="Address"
+                  onUpdate={setAddress}
+                  error={showError("address")}
+                />
+              </ClientOnly>
             </div>
 
-            <button className="w-full p-3 mt-6 text-lg font-semibold text-white bg-blue-600 rounded">
-              Update Address
+            <div className="mb-4">
+              <ClientOnly>
+                <TextInput
+                  className="w-full"
+                  string={zipcode}
+                  placeholder="Zip Code"
+                  onUpdate={setZipcode}
+                  error={showError("zipcode")}
+                />
+              </ClientOnly>
+            </div>
+
+            <div className="mb-4">
+              <ClientOnly>
+                <TextInput
+                  className="w-full"
+                  string={city}
+                  placeholder="City"
+                  onUpdate={setCity}
+                  error={showError("city")}
+                />
+              </ClientOnly>
+            </div>
+
+            <div className="mb-4">
+              <ClientOnly>
+                <TextInput
+                  className="w-full"
+                  string={country}
+                  placeholder="Country"
+                  onUpdate={setCountry}
+                  error={showError("country")}
+                />
+              </ClientOnly>
+            </div>
+
+            <button
+              type="submit"
+              disabled={isUpdatingAddress}
+              className={`w-full p-3 mt-6 text-lg font-semibold text-white bg-blue-600 rounded ${
+                isUpdatingAddress ? "bg-blue-800" : "bg-blue-600"
+              }`}
+            >
+              {!isUpdatingAddress ? (
+                <p>Update Address</p>
+              ) : (
+                <p className="flex items-center justify-center gap-2">
+                  <AiOutlineLoading3Quarters className="animate-spin" />
+                  Please wait...
+                </p>
+              )}
             </button>
           </form>
         </div>
