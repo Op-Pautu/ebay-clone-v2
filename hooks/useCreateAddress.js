@@ -1,10 +1,18 @@
 const useCreateAddress = async (details) => {
-  let url = "create";
+  if (!details) {
+    throw new Error("Details object is required.");
+  }
 
-  if (details.addressId) url = "update";
+  let url = "create";
+  let method = "POST";
+
+  if (details.addressId) {
+    url = "update";
+    method = "PUT";
+  }
 
   const response = await fetch(`/api/address/${url}`, {
-    method: "POST",
+    method,
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       addressId: details.addressId,

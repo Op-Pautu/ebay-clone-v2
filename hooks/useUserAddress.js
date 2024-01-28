@@ -1,13 +1,18 @@
 const useUserAddress = async () => {
-  let address = {};
+  try {
+    let response = await fetch("/api/address/get");
 
-  let response = await fetch("/api/address/get");
-
-  if (response) {
-    let data = await response.json();
-    if (data) address = data;
+    if (response.ok) {
+      let data = await response.json();
+      return data || null; // Return data or null if no data is available
+    } else {
+      console.error(`Error fetching user address. Status: ${response.status}`);
+      return null;
+    }
+  } catch (error) {
+    console.error("Error during fetch:", error);
+    return null;
   }
-  return address;
 };
 
 export default useUserAddress;
