@@ -3,10 +3,12 @@
 import TextInput from "@/components/TextInput";
 import MainLayout from "@/components/layouts/MainLayout";
 import { useUser } from "@/context/user";
+import useCreateAddress from "@/hooks/useCreateAddress";
 import useIsLoading from "@/hooks/useIsLoading";
 import useUserAddress from "@/hooks/useUserAddress";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 export default function Address() {
   const router = useRouter();
@@ -58,6 +60,62 @@ export default function Address() {
     setZipcode(result.zipcode);
     setCity(result.city);
     setCountry(result.country);
+  };
+
+  const validate = () => {
+    setError({});
+    let isError = false;
+
+    if (!name) {
+      setError({ type: "name", message: "A name is required" });
+      isError = true;
+    } else if (!address) {
+      setError({ type: "address", message: "An address is required" });
+      isError = true;
+    } else if (!zipcode) {
+      setError({ type: "zipcode", message: "A zipcode is required" });
+      isError = true;
+    } else if (!city) {
+      setError({ type: "city", message: "A city is required" });
+      isError = true;
+    } else if (!country) {
+      setError({ type: "country", message: "A country is required" });
+      isError = true;
+    }
+    return isError;
+  };
+
+  const submit = async (event) => {
+    event.preventDefault();
+    let isError = validate();
+
+    if (isError) {
+      toast.error(error.message, { autoClose: 3000 });
+      return;
+    }
+
+    try {
+      setIsUpdatingAddress(true);
+
+      const response = await useCreateAddress({
+        addressId,
+        name,
+        address,
+        zipcode,
+        city,
+        country,
+      });
+
+      setTheCurrentAddress(response);
+      setIsUpdatingAddress(false);
+
+      toast.success("Address updated", { autoClose: 3000 });
+      router.push("/checkout");
+    } catch (error) {
+      setIsUpdatingAddress(false);
+      console.log(error);
+      alert(error);
+    }
   };
 
   return (

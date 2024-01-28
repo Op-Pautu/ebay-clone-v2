@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
 const Loading = () => {
