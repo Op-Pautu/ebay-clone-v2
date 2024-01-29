@@ -69,19 +69,19 @@ export default function Address() {
     let isError = false;
 
     if (!name) {
-      setError({ type: "name", message: "A name is required" });
+      setError({ type: "name", message: "Name is required" });
       isError = true;
     } else if (!address) {
-      setError({ type: "address", message: "An address is required" });
+      setError({ type: "address", message: "Address is required" });
       isError = true;
     } else if (!zipcode) {
-      setError({ type: "zipcode", message: "A zipcode is required" });
+      setError({ type: "zipcode", message: "Zipcode is required" });
       isError = true;
     } else if (!city) {
-      setError({ type: "city", message: "A city is required" });
+      setError({ type: "city", message: "City is required" });
       isError = true;
     } else if (!country) {
-      setError({ type: "country", message: "A country is required" });
+      setError({ type: "country", message: "Country is required" });
       isError = true;
     }
     return isError;

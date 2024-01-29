@@ -1,4 +1,20 @@
+import { useCart } from "@/context/cart";
+import { toast } from "react-toastify";
+
 const CartItem = ({ product }) => {
+  const cart = useCart();
+
+  const removeItemFromCart = () => {
+    let res = confirm(
+      `Are you sure you want to remove this? "${product.title}"`
+    );
+
+    if (res) {
+      cart.removeFromCart(product);
+      toast.info("Removed from cart", { autoClose: 3000 });
+    }
+  };
+
   return (
     <>
       <div className="relative flex justify-start w-full p-6 my-2 border">
@@ -24,7 +40,10 @@ const CartItem = ({ product }) => {
           </p>
 
           <div className="absolute bottom-0 right-0 p-4 text-sm">
-            <button className="text-blue-500 underline transition hover:text-blue-700 hover:scale-105">
+            <button
+              onClick={() => removeItemFromCart()}
+              className="text-blue-500 underline transition hover:text-blue-700 hover:scale-105"
+            >
               Remove
             </button>
           </div>
