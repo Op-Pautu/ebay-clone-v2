@@ -37,7 +37,7 @@ export default function SimilarProducts() {
         {products.length ? (
           <div className="grid grid-cols-5 gap-4">
             {products.map((product) => (
-              <Product id={product.id} product={product} />
+              <Product key={product.id} id={product.id} product={product} />
             ))}
           </div>
         ) : (
