@@ -3,19 +3,30 @@
 import SimilarProducts from "@/components/SimilarProducts";
 import MainLayout from "@/components/layouts/MainLayout";
 import { useCart } from "@/context/cart";
+import useIsLoading from "@/hooks/useIsLoading";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 export default function ProductPage({ params }) {
   const cart = useCart();
 
-  const product = {
-    id: 1,
-    title: "Brown Leather Bag",
-    description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.  It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-    url: "https://picsum.photos/id/7",
-    price: 2500,
+  const [product, setProduct] = useState({});
+
+  const getProduct = async () => {
+    useIsLoading(true);
+    setProduct({});
+
+    const response = await fetch(`/api/product/${params.id}`);
+    const prod = await response.json();
+    setProduct(prod);
+
+    cart.isItemAddedToCart(prod);
+    useIsLoading(false);
   };
+
+  useEffect(() => {
+    getProduct();
+  }, []);
 
   return (
     <>
