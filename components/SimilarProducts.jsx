@@ -1,26 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Product from "./Product";
 import { BiLoader } from "react-icons/bi";
 
 export default function SimilarProducts() {
-  const products = [
-    {
-      id: 1,
-      title: "Brown Leather Bag",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit ipsum porro optio. Quidem omnis sunt autem. Sint, ipsa doloribus ullam necessitatibus perferendis, quia porro eum possimus, similique assumenda corporis laudantium!",
-      url: "https://picsum.photos/id/7",
-      price: 2500,
-    },
-    {
-      id: 2,
-      title: "School Books",
-      description:
-        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit ipsum porro optio. Quidem omnis sunt autem. Sint, ipsa doloribus ullam necessitatibus perferendis, quia porro eum possimus, similique assumenda corporis laudantium!",
-      url: "https://picsum.photos/id/20",
-      price: 1999,
-    },
-  ];
+  const [products, setProducts] = useState([]);
+
+  const getRandomProducts = async () => {
+    try {
+      const res = await fetch("/api/products/get-random");
+      const result = await res.json();
+
+      if (result) {
+        setProducts(result);
+        return;
+      }
+
+      setProducts([]);
+    } catch (error) {
+      console.log(error);
+      alert(error);
+    }
+  };
+
+  useEffect(() => {
+    getRandomProducts();
+  }, []);
   return (
     <div>
       <div className="border-b py-1 max-w-[1200px] mx-auto" />
