@@ -37,6 +37,7 @@ export default function MainHeader() {
       alert(error);
     }
   }, 500);
+
   return (
     <header id="MainHeader" className="border-b">
       <nav className="flex items-center bg-white w-full mx-auto max-w-[1200px]">
@@ -63,11 +64,11 @@ export default function MainHeader() {
                 className="w-full pl-3 text-sm placeholder-gray-400 focus:outline-none"
               />
 
-              {isSearching ? (
+              {isSearching && (
                 <BiLoaderCircle className="mr-2 animate-spin" size={22} />
-              ) : null}
+              )}
 
-              {items.length > 0 ? (
+              {items.length > 0 && (
                 <div className="absolute bg-white max-w-[910px] h-auto w-full z-20 left-0 top-12 border p-1">
                   {items.map((item) => (
                     <div className="p-1" key={item.id}>
@@ -91,7 +92,7 @@ export default function MainHeader() {
                     </div>
                   ))}
                 </div>
-              ) : null}
+              )}
             </div>
 
             <button className="flex items-center bg-blue-600 text-sm font-semibold text-white p-[11px] ml-2 px-14">

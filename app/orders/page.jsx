@@ -1,8 +1,8 @@
 "use client";
 
 import MainLayout from "@/components/layouts/MainLayout";
+import { useUser } from "@/context/user";
 import useIsLoading from "@/hooks/useIsLoading";
-import { useUser } from "@supabase/auth-helpers-react";
 import moment from "moment";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -75,7 +75,7 @@ export default function Orders() {
                 </p>
 
                 <div className="flex items-center gap-4">
-                  {order?.orderItem.map((item) => (
+                  {order?.orderItems.map((item) => (
                     <div key={item.id} className="flex items-center">
                       <Link
                         href={`/product/${item.product_id}`}
